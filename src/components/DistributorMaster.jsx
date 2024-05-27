@@ -18,7 +18,7 @@ const DistributorMaster = () => {
             <form>
                 
 
-            <div className='input-ldgr  mr-4 mt-1   '  >
+            <div className='input-ldgr  mr-4 mt-3   '  >
             <label htmlFor="distributorCode" className='text-sm mr-[75px] ml-2'>Distributor Code</label>
             : <input type="text" id='distributorCode' name='distributorCode'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>

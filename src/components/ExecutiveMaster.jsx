@@ -18,7 +18,7 @@ const ExecutiveMaster = () => {
             <form>
                 
 
-                <div className='input-ldgr  mr-4 mt-1 ' >
+                <div className='input-ldgr  mr-4 mt-3 ' >
                     <label htmlFor="executiveCode" className='text-sm mr-7 ml-2'>Executive Code</label>
                     : <input type="text" id='executiveCode' name='executiveCode'   className='w-[300px] ml-[6px] h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off'  /> <br />
                     

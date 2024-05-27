@@ -26,7 +26,7 @@ const RegionMaster = () => {
             <form>
                 
 
-                <div className='input-ldgr  mr-4 mt-1 ' >
+                <div className='input-ldgr  mr-4 mt-3 ' >
                     <label htmlFor="regionMasterId" className='text-sm mr-12 ml-2'>Region Master ID</label>
                     : <input type="text" id='regionMasterId' name='regionMasterId'   className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off'  /> <br />
                     

@@ -18,7 +18,7 @@ const Productmaster = () => {
             <form>
                 
 
-            <div className='input-ldgr    '  >
+            <div className='input-ldgr mt-3   '  >
             <label htmlFor="productCode" className='text-sm mr-[51px] ml-2'>Product Code</label>
             : <input type="text" id='productCode' name='productCode'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
         </div>
