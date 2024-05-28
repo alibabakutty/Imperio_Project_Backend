@@ -3,27 +3,55 @@ import { Link } from 'react-router-dom'
 
 const Gateway = () => {
   return (
-    <div >
+    <div className='flex'>
 
-        <div className='w-[250px] h-[50vh] bg-[#C0D6E8] ml-[950px] mt-20 border border-[#5BBCFF]'>
+        <div className='w-[45%] bg-[#DDDDDD] h-[100vh]'>
+            
+        </div>
 
-            <h2 className=' p-1 bg-[#074173] text-white text-center text-[14px]'>Gateway to DOMSS</h2>
 
-            <p className='text-[12px] text-center mt-3 mb-2 text-[#5BBCFF]'>MASTERS</p>
 
-            <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
-                <p className='m-0'>Create</p>
-            </Link>
- 
-            <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
-                <p className='m-0'>Display</p>
-            </Link>
+        <div className='w-[45%] bg-[#EEEEEE] h-[100vh] flex justify-center'>
+            
+            <div className='w-[350px] h-[70vh] bg-[#def1fc]  mt-20 border border-[#5BBCFF]'>
 
-            <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
-                <p className='m-0'>Alter</p>
-            </Link>
+                <h2 className=' p-1 bg-[#2a67b1] text-white text-center text-[14px]'>Gateway to DOMSS</h2>
+
+                <p className='text-[12px] text-center mt-3 mb-2 text-[#686D76]'>MASTERS</p>
+
+                <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
+                    <p className='m-0'>Create</p>
+                </Link>
+
+                <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
+                    <p className='m-0'>Display</p>
+                </Link>
+
+                <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
+                    <p className='m-0'>Alter</p>
+                </Link>
+
+                <p className='text-[12px] text-center mt-3 mb-2 text-[#686D76]'>TRANSACTIONS</p>
+
+                <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
+                    <p className='m-0'>Vouchers</p>
+                </Link>
+
+                <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
+                    <p className='m-0'>DayBook</p>
+                </Link>
+
+            </div>
 
         </div>
+
+
+
+        <div className='w-[10%] bg-[#DDDDDD] h-[100vh]'>
+
+        </div>
+
+        
         
         
     </div>

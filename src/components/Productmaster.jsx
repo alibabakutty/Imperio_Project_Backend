@@ -6,7 +6,7 @@ const Productmaster = () => {
     <div className='w-1/2 border'>
 
         <div className='w-[550px] h-[30px] flex justify-between text-[20px] bg-[#F1E5D1] ml-[750px] mt-10 '>
-            <h2 className='ml-2'>Product Master</h2>
+            <h2 className='ml-[200px]'>Product Master</h2>
             <span className='cursor-pointer mt-[5px] mr-2'>
                 <IoClose />
             </span>
@@ -24,12 +24,17 @@ const Productmaster = () => {
         </div>
 
         <div className='input-ldgr    '  >
-            <label htmlFor="productDescription" className='text-sm mr-2 ml-2'>Product Descriptions</label>
+            <label htmlFor="productDescription" className='text-sm mr-[9px] ml-2'>Product Descriptions</label>
             : <input type="text" id='productDescription' name='productDescription'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
         </div>
 
         <div className='input-ldgr    '  >
-            <label htmlFor="productUom" className='text-sm mr-[51px] ml-2'>Product UOM</label>
+            <label htmlFor="productCategory" className='text-sm mr-[28px] ml-2'>Product Category</label>
+            : <input type="text" id='productCategory' name='productCategory'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+        </div>
+
+        <div className='input-ldgr    '  >
+            <label htmlFor="productUom" className='text-sm mr-[47px] ml-2'>Product UOM</label>
             : <input type="text" id='productUom' name='productUom'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
         </div>
 
