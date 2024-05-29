@@ -7,8 +7,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Arial Nova', 'serif'],
-      },
+        sans: ['Arial Nova', 'sans-serif'],
+      }
+
+      
     },
   },
   plugins: [],

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
-import { createNewRegionMaster } from '../services/RegionMasterService';
+import { createNewRegionMaster } from '../services/MasterService';
 import { useNavigate } from 'react-router-dom';
+import '../assets/css/font.css'
 
 
 
@@ -27,7 +28,7 @@ const RegionMaster = () => {
 
         createNewRegionMaster(region).then((response) =>{
             console.log(response.data);
-            navigator('/added')
+            navigator('/addedRegion')
         }).catch((error) =>{
             console.error('Error creating region master:', error);
         })

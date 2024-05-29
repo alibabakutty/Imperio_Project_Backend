@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import '../assets/css/font.css'
 
 const Gateway = () => {
   return (
@@ -23,7 +24,7 @@ const Gateway = () => {
                     <p className='m-0'>Create</p>
                 </Link>
 
-                <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
+                <Link to="/display" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
                     <p className='m-0'>Display</p>
                 </Link>
 

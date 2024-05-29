@@ -1,0 +1,16 @@
+import axios from "axios";
+
+
+const REST_API_BASE_URL = "http://localhost:8080/api/regionMaster";
+
+
+export const createNewRegionMaster = (region) => axios.post(REST_API_BASE_URL+"/addRegion", region);
+
+
+export const createNewExecutiveMaster = (executive) => axios.post(REST_API_BASE_URL+"/addExecutive", executive);
+
+
+export const createNewDistributorMaster = (distributor) => axios.post(REST_API_BASE_URL+"/addDistributor", distributor);
+
+
+export const createNewProductMaster = (product) => axios.post(REST_API_BASE_URL+"/addProduct", product);

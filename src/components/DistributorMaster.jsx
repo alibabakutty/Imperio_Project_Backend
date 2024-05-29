@@ -1,7 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom';
+import { createNewDistributorMaster } from '../services/MasterService';
+import '../assets/css/font.css'
+
 
 const DistributorMaster = () => {
+
+
+
+    const [distributorCode, setDistributorCode] = useState('');
+    const [distributorCompanyName, setDistributorCompanyName] = useState('');
+    const [distributorOwnerName, setDistributorOwnerName] = useState('');
+    const [mobileNo, setMobileNo] = useState('');
+    const [executiveCode, setExecutiveCode] = useState('');
+    const [executiveMaster, setExecutiveMaster] = useState('');
+    const [regionCode, setRegionCode] = useState('');
+    const [regionMaster, setRegionMaster] = useState('');
+    const [contactPersonName, setContactPersonName] = useState('');
+    const [contactMobileNo, setContactMobileNo] = useState('');
+
+
+    const navigator = useNavigate();
+
+
+    function saveDsitributorMaster(e){
+        e.preventDefault();
+
+        const distributor = {distributorCode, distributorCompanyName, distributorOwnerName, mobileNo, executiveCode, executiveMaster, regionCode, regionMaster, contactPersonName, contactMobileNo};
+
+        console.log(distributor);
+
+
+        createNewDistributorMaster(distributor).then((response) =>{
+            console.log(response.data);
+            navigator('/addedDistributor');
+        }).catch((error) => {
+            console.error('Error catching distributor master:', error);
+        })
+    }
+
   return (
     <div className='w-1/2 border'>
 
@@ -19,53 +57,53 @@ const DistributorMaster = () => {
                 
 
             <div className='input-ldgr  mr-4 mt-3   '  >
-            <label htmlFor="distributorCode" className='text-sm mr-[75px] ml-2'>Distributor Code</label>
-            : <input type="text" id='distributorCode' name='distributorCode'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+            <label htmlFor="distributorCode" className='text-sm mr-[79px] ml-2'>Distributor Code</label>
+            : <input type="text" id='distributorCode' name='distributorCode' value={distributorCode} onChange={(e) => setDistributorCode(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
                 <label htmlFor="distributorCompanyName" className='text-sm mr-[13px] ml-2'>Distributor Company Name</label>
-                : <input type="text" id='distributorCompanyName' name='distributorCompanyName'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                : <input type="text" id='distributorCompanyName' name='distributorCompanyName' value={distributorCompanyName} onChange={(e) => setDistributorCompanyName(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
-                <label htmlFor="distributorOwnerName" className='text-sm  mr-[29px] ml-2'>Distributor Owner Name</label>
-                : <input type="text" id='distributorOwnerName' name='distributorOwnerName'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                <label htmlFor="distributorOwnerName" className='text-sm  mr-[31px] ml-2'>Distributor Owner Name</label>
+                : <input type="text" id='distributorOwnerName' name='distributorOwnerName' value={distributorOwnerName} onChange={(e) => setDistributorOwnerName(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
-                <label htmlFor="mobileNo" className='text-sm  mr-[108px] ml-2'>Mobile No</label>
-                : <input type="text" id='mobileNo' name='mobileNo'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                <label htmlFor="mobileNo" className='text-sm  mr-[118px] ml-2'>Mobile No</label>
+                : <input type="text" id='mobileNo' name='mobileNo' value={mobileNo} onChange={(e) => setMobileNo(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
-                <label htmlFor="executiveCode" className='text-sm  mr-[80px] ml-2'>Executive Code</label>
-                : <input type="text" id='executiveCode' name='executiveCode'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                <label htmlFor="executiveCode" className='text-sm  mr-[84px] ml-2'>Executive Code</label>
+                : <input type="text" id='executiveCode' name='executiveCode' value={executiveCode} onChange={(e) => setExecutiveCode(e.target.value)} className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
-                <label htmlFor="executiveMaster" className='text-sm  mr-[71px] ml-2'>Executive Master</label>
-                : <input type="text" id='executiveMaster' name='executiveMaster'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                <label htmlFor="executiveMaster" className='text-sm  mr-[75px] ml-2'>Executive Master</label>
+                : <input type="text" id='executiveMaster' name='executiveMaster' value={executiveMaster} onChange={(e) => setExecutiveMaster(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
-                <label htmlFor="regionCode" className='text-sm  mr-[96px] ml-2'>Region Code</label>
-                : <input type="text" id='regionCode' name='regionCode'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                <label htmlFor="regionCode" className='text-sm  mr-[101px] ml-2'>Region Code</label>
+                : <input type="text" id='regionCode' name='regionCode' value={regionCode} onChange={(e) => setRegionCode(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
-                <label htmlFor="regionMaster" className='text-sm  mr-[87px] ml-2'>Region Master</label>
-                : <input type="text" id='regionMaster' name='regionMaster'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                <label htmlFor="regionMaster" className='text-sm  mr-[92px] ml-2'>Region Master</label>
+                : <input type="text" id='regionMaster' name='regionMaster' value={regionMaster} onChange={(e) => setRegionMaster(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
-                <label htmlFor="contactPersonName" className='text-sm  mr-[48px] ml-2'>Contact Person Name</label>
-                : <input type="text" id='contactPersonName' name='contactPersonName'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                <label htmlFor="contactPersonName" className='text-sm  mr-[46px] ml-2'>Contact Person Name</label>
+                : <input type="text" id='contactPersonName' name='contactPersonName' value={contactPersonName} onChange={(e) => setContactPersonName(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
             <div className='input-ldgr    '  >
-                <label htmlFor="contactMobileNo" className='text-sm  mr-[63px] ml-2'>Contact Mobile No</label>
-                : <input type="text" id='contactMobileNo' name='contactMobileNo'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                <label htmlFor="contactMobileNo" className='text-sm  mr-[67px] ml-2'>Contact Mobile No</label>
+                : <input type="text" id='contactMobileNo' name='contactMobileNo' value={contactMobileNo} onChange={(e) => setContactMobileNo(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
 
@@ -78,7 +116,7 @@ const DistributorMaster = () => {
 
         <div className='flex justify-center mt-[250px] '>
 
-            <button type='submit' className='text-sm px-8 py-1 mt-3 border hover:bg-slate-400'    >A: Accept</button>
+            <button type='submit' className='text-sm px-8 py-1 mt-3 border hover:bg-slate-400'  onClick={saveDsitributorMaster}  >A: Accept</button>
 
         </div>
 

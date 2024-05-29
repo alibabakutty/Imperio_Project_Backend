@@ -1,7 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
+import { useNavigate } from 'react-router-dom';
+import { createNewExecutiveMaster } from '../services/MasterService';
+import '../assets/css/font.css'
+
 
 const ExecutiveMaster = () => {
+
+
+    const [executiveCode, setExecutiveCode] = useState('');
+    const [executiveMaster, setExecutiveMaster] = useState('');
+    const [dateOfJoin, setDateOfJoin] = useState('');
+    const [mobileNo, setMobileNo] = useState('');
+    const [emailId, setEmailId] = useState('');
+    const [status, setStatus] = useState('');
+
+
+    const navigator = useNavigate();
+
+    function saveExecutiveMaster(e){
+        e.preventDefault();
+
+        const executive = {executiveCode, executiveMaster, dateOfJoin, mobileNo, emailId, status};
+
+        console.log(executive);
+
+
+        createNewExecutiveMaster(executive).then((response) => {
+            console.log(response.data);
+            navigator('/addedExecutive')
+        }).catch((error) => {
+            console.error('Error creating executive master:', error);
+        })
+    }
+
+
+
   return (
     <div className='w-1/2 border'>
 
@@ -20,37 +54,37 @@ const ExecutiveMaster = () => {
 
                 <div className='input-ldgr  mr-4 mt-3 ' >
                     <label htmlFor="executiveCode" className='text-sm mr-[30px] ml-2'>Executive Code</label>
-                    : <input type="text" id='executiveCode' name='executiveCode'   className='w-[300px] ml-[6px] h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off'  /> <br />
+                    : <input type="text" id='executiveCode' name='executiveCode' value={executiveCode} onChange={(e) => setExecutiveCode(e.target.value)} className='w-[300px] ml-[6px] h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off'  /> <br />
                     
                 </div>
 
                 <div className='input-ldgr  mr-4 mt-1 ' >
-                    <label htmlFor="executiveMaster" className='text-sm mr-[20px] ml-2' >Executive Master</label>
-                    : <input type="text" id='executiveMaster' name='executiveMaster'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'   />
+                    <label htmlFor="executiveMaster" className='text-sm mr-[21px] ml-2' >Executive Master</label>
+                    : <input type="text" id='executiveMaster' name='executiveMaster' value={executiveMaster} onChange={(e) => setExecutiveMaster(e.target.value)} className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'   />
                     
                 </div>
 
 
                 <div className='input-ldgr    '  >
-                    <label htmlFor="dateOfJoin" className='text-sm mr-[50px] ml-2'>Date of Join</label>
-                    : <input type="text" id='dateOfJoin' name='dateOfJoin'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                    <label htmlFor="dateOfJoin" className='text-sm mr-[54px] ml-2'>Date of Join</label>
+                    : <input type="text" id='dateOfJoin' name='dateOfJoin' value={dateOfJoin} onChange={(e) => setDateOfJoin(e.target.value)} className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
                 </div>
 
                 <div className='input-ldgr    '  >
-                    <label htmlFor="mobileNo" className='text-sm mr-[57px] ml-2'>Mobile No</label>
-                    : <input type="text" id='mobileNo' name='mobileNo'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                    <label htmlFor="mobileNo" className='text-sm mr-[64px] ml-2'>Mobile No</label>
+                    : <input type="text" id='mobileNo' name='mobileNo' value={mobileNo} onChange={(e) => setMobileNo(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
                 </div>
 
 
                 <div className='input-ldgr    '  >
-                    <label htmlFor="emailId" className='text-sm mr-[67px] ml-2'>Email ID</label>
-                    : <input type="text" id='emailId' name='emailId'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                    <label htmlFor="emailId" className='text-sm mr-[77px] ml-2'>Email ID</label>
+                    : <input type="text" id='emailId' name='emailId' value={emailId} onChange={(e) => setEmailId(e.target.value)} className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
                 </div>
 
                 
                 <div className='input-ldgr    '  >
-                    <label htmlFor="status" className='text-sm mr-[85px] ml-2'>Status</label>
-                    : <input type="text" id='status' name='status'  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
+                    <label htmlFor="status" className='text-sm mr-[89px] ml-2'>Status</label>
+                    : <input type="text" id='status' name='status'  value={status} onChange={(e) => setStatus(e.target.value)} className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
                 </div>
                 
 
@@ -63,7 +97,7 @@ const ExecutiveMaster = () => {
 
         <div className='flex justify-center mt-[300px]'>
 
-            <button type='submit' className='text-sm px-8 py-1 mt-3 border hover:bg-slate-400'    >A: Accept</button>
+            <button type='submit' className='text-sm px-8 py-1 mt-3 border hover:bg-slate-400'  onClick={saveExecutiveMaster}  >A: Accept</button>
 
         </div>
 
