@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createNewExecutiveMaster } from '../services/MasterService';
 import '../assets/css/font.css'
 
@@ -37,7 +37,7 @@ const ExecutiveMaster = () => {
 
 
   return (
-    <div className='w-1/2 border'>
+    <div className='w-1/2 border h-[100vh]'>
 
         <div className='w-[550px] h-[30px] flex justify-between text-[20px] bg-[#F1E5D1] ml-[750px] mt-10 border border-gray-500 border-b-0'>
             <h2 className='ml-[200px]'>Executive Master</h2>
@@ -88,16 +88,20 @@ const ExecutiveMaster = () => {
                 </div>
                 
 
-                
+                <div className='mt-[350px] '>
+                    <button type='submit' className='text-sm px-8 py-1 mt-3 border bg-slate-600 hover:bg-slate-800' onClick={saveExecutiveMaster}   >A: Accept</button>
+                </div>
 
 
             </form>
             
         </div>
 
-        <div className='flex justify-center mt-[300px]'>
+        <div className='mt-[335px] ml-[495px]'>
 
-            <button type='submit' className='text-sm px-8 py-1 mt-3 border hover:bg-slate-400'  onClick={saveExecutiveMaster}  >A: Accept</button>
+            
+
+            <Link to={"/list"} className='border px-11 py-[5px] text-sm bg-slate-600 hover:bg-slate-800'>Back</Link>
 
         </div>
 

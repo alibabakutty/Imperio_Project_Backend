@@ -10,32 +10,44 @@ const DisplayOFMasters = () => {
         </div>
 
 
-        <div className='w-[45%] h-[100vh] bg-[#EEEEEE] flex justify-center'>
-            <div className='w-[350px] h-[70vh] border border-gray-600 mt-20 bg-[#def1fc]'>
+        <div className='w-[45%] h-[100vh] bg-[#EEEEEE]'>
 
-                        
-                <h2 className=' p-1 bg-[#2a67b1] text-white text-center text-[14px]'>List of Masters</h2>
+            <div className='flex justify-center items-center flex-col'>
 
-                <p className='text-[13px] ml-[120px] mt-12 text-[#686D76]'>DOMSS MASTER</p>
+                <div className='w-[350px] h-[70vh] border border-gray-600 mt-20 bg-[#def1fc]'>
 
-                <Link to="/regionFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-2 mb-1'>
-                    <p className='m-0'>Region Master</p>
-                </Link>
+                            
+                    <h2 className=' p-1 bg-[#2a67b1] text-white text-center text-[14px]'>List of Masters</h2>
 
-                <Link to="/executive" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
-                    <p className='m-0'>Executive Master</p>
-                </Link>
+                    <p className='text-[13px] ml-[120px] mt-12 text-[#686D76]'>DOMSS MASTER</p>
 
-                <Link to="/distributor" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
-                    <p className='m-0'>Distributor Master</p>
-                </Link>
+                    <Link to="/regionFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-2 mb-1'>
+                        <p className='m-0'>Region Master</p>
+                    </Link>
 
-                <Link to="/product" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
-                    <p className='m-0'>Product Master</p>
-                </Link>
+                    <Link to="/regionFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
+                        <p className='m-0'>Executive Master</p>
+                    </Link>
 
+                    <Link to="/regionFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
+                        <p className='m-0'>Distributor Master</p>
+                    </Link>
+
+                    <Link to="/regionFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
+                        <p className='m-0'>Product Master</p>
+                    </Link>
+
+
+                </div>
+
+                <div className='mt-[70px] '>
+                    <Link to={"/"} className='border px-11 py-[5px] text-sm bg-slate-600 hover:bg-slate-800 '>Back</Link>
+                </div>
 
             </div>
+
+
+            
 
         </div>
 

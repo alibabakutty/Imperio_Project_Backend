@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
 import { createNewRegionMaster } from '../services/MasterService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../assets/css/font.css'
 
 
@@ -36,7 +36,7 @@ const RegionMaster = () => {
 
 
   return (
-    <div className='w-1/2 border '>
+    <div className='w-1/2 border h-[100vh]'>
 
         <div className='w-[550px] h-[30px] flex justify-between text-[20px] bg-[#F1E5D1] ml-[750px] mt-10 border border-gray-500 border-b-0'>
             <h2 className='ml-[200px]'>Region Master</h2>
@@ -53,7 +53,7 @@ const RegionMaster = () => {
 
                 <div className='input-ldgr  mr-4 mt-3 ' >
                     <label htmlFor="regionMasterId" className='text-sm mr-12 ml-2'>Region Master ID</label>
-                    : <input type="text" id='regionMasterId' name='regionMasterId' value={regionMasterId}  onChange={(e) => setRegionMasterId(e.target.value)} className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off'  /> <br />
+                    : <input type="text" id='regionMasterId' name='regionMasterId' value={regionMasterId}  onChange={(e) => setRegionMasterId(e.target.value)} className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off'  />
                     
                 </div>
 
@@ -75,27 +75,25 @@ const RegionMaster = () => {
                 </div>
 
 
-
-
-                
-
-                
-
-                
-
-                
-                
-
+                <div className='mt-[400px] '>
+                    <button type='submit' className='text-sm px-8 py-1 mt-3 border bg-slate-600 hover:bg-slate-800' onClick={saveRegionMaster}   >A: Accept</button>
+                </div>
 
             </form>
             
         </div>
 
-        <div className='flex justify-center mt-[380px]'>
+        
 
-            <button type='submit' className='text-sm px-8 py-1 mt-3 border hover:bg-slate-400' onClick={saveRegionMaster}   >A: Accept</button>
+        <div className='mt-[400px] ml-[495px]'>
+
+            
+
+            <Link to={"/list"} className='border px-11 py-[5px] text-sm bg-slate-600 hover:bg-slate-800'>Back</Link>
 
         </div>
+
+        
            
         
     </div>

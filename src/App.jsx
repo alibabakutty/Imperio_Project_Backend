@@ -14,6 +14,7 @@ import ProductMasterAddedCheck from "./message/ProductMasterAddedCheck"
 import './assets/css/font.css'
 import DisplayOFMasters from "./components/DisplayOFMasters"
 import RegionFilter from "./components/RegionFilter"
+import DisplayRegionMaster from "./components/DisplayRegionMaster"
 
 
 function App() {
@@ -42,12 +43,6 @@ function App() {
          {/* http://localhost:4000/product */}
          <Route path="/product" element = {<Productmaster />} />
 
-
-          {/* http://localhost:4000/display */}
-          <Route path="/display" element = {<DisplayOFMasters /> } />
-
-          {/* http://localhost:4000/regionFilter */}
-          <Route path="/regionFilter" element = {<RegionFilter /> } />
           
          {/* http://localhost:4000/addedRegion */}
          <Route path="/addedRegion" element = {<RegionMasterAddedCheck />} />
@@ -60,6 +55,16 @@ function App() {
 
          {/* http://localhost:4000/addedDistributor */}
          <Route path="addedProduct" element = {<ProductMasterAddedCheck />} />
+
+         {/* http://localhost:4000/display */}
+         <Route path="/display" element = {<DisplayOFMasters /> } />
+
+          {/* http://localhost:4000/regionFilter */}
+          <Route path="/regionFilter" element = {<RegionFilter /> } />
+
+         {/* http://localhost:4000/DisplayRegion */}
+         <Route path="displayRegion/:regionMasterId" element = {<DisplayRegionMaster />} />
+
           
         </Routes>
       </BrowserRouter>

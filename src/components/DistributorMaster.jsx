@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createNewDistributorMaster } from '../services/MasterService';
 import '../assets/css/font.css'
 
@@ -41,7 +41,7 @@ const DistributorMaster = () => {
     }
 
   return (
-    <div className='w-1/2 border'>
+    <div className='w-1/2 border h-[100vh]'>
 
         <div className='w-[550px] h-[30px] flex justify-between text-[20px] bg-[#F1E5D1] ml-[750px] mt-10 border border-gray-500 border-b-0'>
             <h2 className='ml-[190px]'>Distributor Master</h2>
@@ -106,7 +106,9 @@ const DistributorMaster = () => {
                 : <input type="text" id='contactMobileNo' name='contactMobileNo' value={contactMobileNo} onChange={(e) => setContactMobileNo(e.target.value)}  className='w-[300px] ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200  focus:border focus:border-blue-500 focus:outline-none' autoComplete='off'    />
             </div>
 
-
+            <div className='mt-[260px] '>
+                <button type='submit' className='text-sm px-8 py-1 mt-3 border bg-slate-600 hover:bg-slate-800' onClick={saveDsitributorMaster}   >A: Accept</button>
+            </div>
 
 
 
@@ -114,9 +116,10 @@ const DistributorMaster = () => {
             
         </div>
 
-        <div className='flex justify-center mt-[250px] '>
+        <div className='mt-[260px] ml-[495px]'>
 
-            <button type='submit' className='text-sm px-8 py-1 mt-3 border hover:bg-slate-400'  onClick={saveDsitributorMaster}  >A: Accept</button>
+
+            <Link to={"/list"} className='border px-11 py-[5px] text-sm bg-slate-600 hover:bg-slate-800'>Back</Link>
 
         </div>
 
