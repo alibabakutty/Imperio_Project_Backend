@@ -3,8 +3,11 @@ import { listOfRegions } from '../services/MasterService';
 import { Link } from 'react-router-dom';
 
 
-const RegionFilter = () => {
-    const [regionMasterId, setRegionMasterId] = useState('');
+
+const RegionAlter = () => {
+
+
+  const [regionMasterId, setRegionMasterId] = useState('');
 
     const [region, setRegion] = useState([]);
 
@@ -22,8 +25,10 @@ const RegionFilter = () => {
             });
     }, []);
 
-    return (
-        <div className='flex'>
+
+
+  return (
+    <div className='flex'>
             <div className='w-[45%] h-[100vh] bg-[#DDDDDD]'></div>
 
             <div className='w-[45%] h-[100vh] bg-[#EEEEEE] flex flex-col items-center justify-start'>
@@ -42,12 +47,12 @@ const RegionFilter = () => {
                         </thead>
                         <div className='border border-b-gray-500 w-[347px]'>
                             <p className='ml-[285px] text-[14px]'>Create</p>
-                            <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1' to={"/display"}><p className='ml-[257px] text-[14px] px-[30px]'>Back</p></Link>
+                            <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1' to={"/alter"}><p className='ml-[257px] text-[14px] px-[30px]'>Back</p></Link>
                         </div>
                         <tbody>
                             {region.map(reg => (
                                 <tr className='' key={reg.regionMasterId}>
-                                    <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={`/displayRegion/${reg.regionMasterId}`}>
+                                    <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={`/alterRegionMaster/${reg.regionMasterId}`}>
                                         <td className='block text-center text-[14px] focus:bg-[#FEB941] outline-none'>
                                             {reg.regionMasterId}
                                         </td>
@@ -65,7 +70,7 @@ const RegionFilter = () => {
 
             <div className='w-[10%] bg-[#DDDDDD] h-[100vh]'></div>
         </div>
-    );
-};
+  )
+}
 
-export default RegionFilter;
+export default RegionAlter

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { listOfProducts } from '../services/MasterService';
 import { Link } from 'react-router-dom';
 
-const ProductFilter = () => {
+const ProductAlter = () => {
 
 
   const [productCode, setProductCode] = useState('');
@@ -47,7 +47,7 @@ const ProductFilter = () => {
               </thead>
               <div className='border border-b-gray-500 w-[347px]'>
                   <p className='ml-[285px] text-[14px]'>Create</p>
-                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/display"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
+                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/alter"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
               </div>
               <tbody>
                   {product.map(prod => (
@@ -71,4 +71,4 @@ const ProductFilter = () => {
   )
 }
 
-export default ProductFilter
+export default ProductAlter

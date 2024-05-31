@@ -25,15 +25,15 @@ const DisplayOFMasters = () => {
                         <p className='m-0'>Region Master</p>
                     </Link>
 
-                    <Link to="/regionFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
+                    <Link to="/executiveFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
                         <p className='m-0'>Executive Master</p>
                     </Link>
 
-                    <Link to="/regionFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
+                    <Link to="/distributorFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
                         <p className='m-0'>Distributor Master</p>
                     </Link>
 
-                    <Link to="/regionFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
+                    <Link to="/productFilter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mt-1 mb-1'>
                         <p className='m-0'>Product Master</p>
                     </Link>
 

@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { listOfDistributors } from '../services/MasterService';
 import { Link } from 'react-router-dom';
 
-const DistributorFilter = () => {
+const DistributorAlter = () => {
+
 
   const [distributorCode, setDistributorCode] = useState('');
 
@@ -24,6 +25,7 @@ const DistributorFilter = () => {
 
   }, []);
 
+
   return (
     <div className='flex'>
       <div className='w-[45%] h-[100vh] bg-[#DDDDDD]'></div>
@@ -44,7 +46,7 @@ const DistributorFilter = () => {
               </thead>
               <div className='border border-b-gray-500 w-[347px]'>
                   <p className='ml-[285px] text-[14px]'>Create</p>
-                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/display"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
+                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/alter"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
               </div>
               <tbody>
                   {distributor.map(dis => (
@@ -68,4 +70,4 @@ const DistributorFilter = () => {
   )
 }
 
-export default DistributorFilter
+export default DistributorAlter

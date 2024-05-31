@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { listOfExecutives } from '../services/MasterService';
 import { Link } from 'react-router-dom';
 
+const ExecutiveAlter = () => {
 
-const ExecutiveFilter = () => {
 
   const [executiveCode, setExecutiveCode] = useState('');
 
@@ -27,7 +27,6 @@ const ExecutiveFilter = () => {
 
 
 
-
   return (
     <div className='flex'>
       <div className='w-[45%] h-[100vh] bg-[#DDDDDD]'></div>
@@ -48,7 +47,7 @@ const ExecutiveFilter = () => {
               </thead>
               <div className='border border-b-gray-500 w-[347px]'>
                   <p className='ml-[285px] text-[14px]'>Create</p>
-                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/display"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
+                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/alter"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
               </div>
               <tbody>
                   {executive.map(exe => (
@@ -72,4 +71,4 @@ const ExecutiveFilter = () => {
   )
 }
 
-export default ExecutiveFilter
+export default ExecutiveAlter

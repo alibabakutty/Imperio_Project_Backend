@@ -28,7 +28,7 @@ const Gateway = () => {
                     <p className='m-0'>Display</p>
                 </Link>
 
-                <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
+                <Link to="/alter" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
                     <p className='m-0'>Alter</p>
                 </Link>
 

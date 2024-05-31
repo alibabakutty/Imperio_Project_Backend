@@ -15,6 +15,18 @@ import './assets/css/font.css'
 import DisplayOFMasters from "./components/DisplayOFMasters"
 import RegionFilter from "./components/RegionFilter"
 import DisplayRegionMaster from "./components/DisplayRegionMaster"
+import ExecutiveFilter from "./components/ExecutiveFilter"
+import DisplayExecutiveMaster from "./components/DisplayExecutiveMaster"
+import DistributorFilter from "./components/DistributorFilter"
+import DisplayDistributorMaster from "./components/DisplayDistributorMaster"
+import ProductFilter from "./components/ProductFilter"
+import DisplayProductMaster from "./components/DisplayProductMaster"
+import RegionAlter from "./components/RegionAlter"
+import ExecutiveAlter from "./components/ExecutiveAlter"
+import DistributorAlter from "./components/DistributorAlter"
+import ProductAlter from "./components/ProductAlter"
+import AlterOfMasters from "./components/AlterOfMasters"
+import AlterRegionMaster from "./components/AlterRegionMaster"
 
 
 function App() {
@@ -62,8 +74,46 @@ function App() {
           {/* http://localhost:4000/regionFilter */}
           <Route path="/regionFilter" element = {<RegionFilter /> } />
 
-         {/* http://localhost:4000/DisplayRegion */}
+          {/* http://localhost:4000/executiveFilter */}
+          <Route path="/executiveFilter" element={<ExecutiveFilter />} />
+
+          {/* http://localhost:4000/distributorFilter */}
+          <Route path="/distributorFilter" element={<DistributorFilter />} />
+
+          {/* http://localhost:4000/productFilter */}
+          <Route path="/productFilter" element={<ProductFilter />} />
+
+          {/* http://localhost:4000/display */}
+          <Route path="/alter" element = {<AlterOfMasters />} />
+
+          {/* http://localhost:4000/regionAlter */}
+          <Route path="/regionAlter" element={<RegionAlter />} />
+
+          {/* http://localhost:4000/executiveAlter */}
+          <Route path="/executiveAlter" element={<ExecutiveAlter />} />
+
+          {/* http://localhost:4000/distributorAlter */}
+          <Route path="/distributorAlter" element={<DistributorAlter />} />
+
+          {/* http://localhost:4000/productAlter */}
+          <Route path="/productAlter" element={<ProductAlter />} />
+
+
+         {/* http://localhost:4000/displayRegion */}
          <Route path="displayRegion/:regionMasterId" element = {<DisplayRegionMaster />} />
+
+         {/* http://localhost:4000/displayExecutive */}
+         <Route path="displayExecutive/:executiveCode" element = {<DisplayExecutiveMaster />} />
+
+         {/* http://localhost:4000/displayDistributor */}
+         <Route path="displayDistributor/:distributorCode" element={<DisplayDistributorMaster />} />
+
+         {/* http://localhost:4000/displayProduct */}
+         <Route path="displayProduct/:productCode" element={<DisplayProductMaster />} />
+
+         {/* http://localhost:4000/alterRegionMaster */}
+         <Route path="alterRegionMaster/:regionMasterId" element = {<AlterRegionMaster />} />
+
 
           
         </Routes>
