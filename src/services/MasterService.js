@@ -24,3 +24,6 @@ export const listOfExecutives = () => {return axios.get(REST_API_BASE_URL+"/allE
 export const listOfDistributors = () => {return axios.get(REST_API_BASE_URL+"/allDistributor")};
 
 export const listOfProducts = () => {return axios.get(REST_API_BASE_URL+"/allProduct")};
+
+
+// ALTER

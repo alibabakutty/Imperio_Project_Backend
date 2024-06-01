@@ -10,6 +10,9 @@ const ProductFilter = () => {
 
   const [product, setProduct] = useState([]);
 
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
   const inputRef = useRef(null);
 
 
@@ -19,11 +22,27 @@ const ProductFilter = () => {
 
     listOfProducts().then((response) =>{
       setProduct(response.data);
+      setFilteredProducts(response.data);
     }).catch(error =>{
       console.error(error);
     })
 
   }, []);
+
+
+  useEffect(() => {
+      filterProducts();
+  }, [productCode]);
+
+
+  const filterProducts = () => {
+    if(productCode === ""){
+      setFilteredProducts(product);
+    }else{
+      const filtered = product.filter(prod => prod.productCode.toLowerCase().includes(productCode.toLowerCase()));
+      setFilteredProducts(filtered);
+    }
+  }
 
 
 
@@ -46,14 +65,14 @@ const ProductFilter = () => {
                   </tr>
               </thead>
               <div className='border border-b-gray-500 w-[347px]'>
-                  <p className='ml-[285px] text-[14px]'>Create</p>
+                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/product"}><p className='ml-[285px] text-[14px]'>Create</p></Link>
                   <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/display"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
               </div>
               <tbody>
-                  {product.map(prod => (
+                  {filteredProducts.map(prod => (
                       <tr key={prod.productCode}>
                             <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={`/displayProduct/${prod.productCode}`}>
-                              <td className='flex justify-center items-center'>{prod.productCode}</td>
+                              <td className='flex justify-center items-center capitalize'>{prod.productCode}</td>
                             </Link>
                       </tr>
                   ))}

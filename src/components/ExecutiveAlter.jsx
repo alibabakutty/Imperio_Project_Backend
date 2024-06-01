@@ -10,6 +10,9 @@ const ExecutiveAlter = () => {
 
   const [executive, setExecutive] = useState([]);
 
+
+  const [filteredExecutives, setFilteredExecutives] = useState([]);
+
   const inputRef = useRef(null);
 
 
@@ -19,11 +22,27 @@ const ExecutiveAlter = () => {
 
     listOfExecutives().then((response) =>{
       setExecutive(response.data);
+      setFilteredExecutives(response.data);
     }).catch(error =>{
       console.error(error);
     })
 
   }, []);
+
+
+  useEffect(() => {
+    filterExecutive();
+  }, [executiveCode]);
+
+
+  const filterExecutive = () => {
+    if(executiveCode === ""){
+      setFilteredExecutives(executive);
+    }else{
+      const filtered = executive.filter(exe => exe.executiveCode.toLowerCase().includes(executiveCode.toLowerCase()));
+      setFilteredExecutives(filtered);
+    }
+  }
 
 
 
@@ -46,14 +65,14 @@ const ExecutiveAlter = () => {
                   </tr>
               </thead>
               <div className='border border-b-gray-500 w-[347px]'>
-                  <p className='ml-[285px] text-[14px]'>Create</p>
+                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/executive"}><p className='ml-[285px] text-[14px]'>Create</p></Link>
                   <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/alter"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
               </div>
               <tbody>
-                  {executive.map(exe => (
+                  {filteredExecutives.map(exe => (
                       <tr key={exe.executiveCode}>
-                            <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={`/displayExecutive/${exe.executiveCode}`}>
-                              <td className='flex justify-center items-center'>{exe.executiveCode}</td>
+                            <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={`/alterExecutiveMaster/${exe.executiveCode}`}>
+                              <td className='flex justify-center items-center capitalize'>{exe.executiveCode}</td>
                             </Link>
                       </tr>
                   ))}

@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/css/font.css'
 
 const Gateway = () => {
+
+    const createRef = useRef(null);
+
+
+    useEffect(() => {
+        // Add the 'focused' class to the "Create" link on load
+        if(createRef.current){
+            createRef.current.focus();
+        }
+    })
   return (
     <div className='flex'>
 
@@ -20,7 +30,7 @@ const Gateway = () => {
 
                 <p className='text-[12px] text-center mt-3 mb-2 text-[#686D76]'>MASTERS</p>
 
-                <Link to="/list" className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
+                <Link to="/list" ref={createRef} className='block text-center text-[14px] focus:bg-[#FEB941] outline-none mb-1'>
                     <p className='m-0'>Create</p>
                 </Link>
 

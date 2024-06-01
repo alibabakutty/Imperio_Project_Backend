@@ -27,6 +27,13 @@ import DistributorAlter from "./components/DistributorAlter"
 import ProductAlter from "./components/ProductAlter"
 import AlterOfMasters from "./components/AlterOfMasters"
 import AlterRegionMaster from "./components/AlterRegionMaster"
+import RegionMasterAlteredCheck from "./message/RegionMasterAlteredCheck"
+import AlterExecutiveMaster from "./components/AlterExecutiveMaster"
+import AlterDistributorMaster from "./components/AlterDistributorMaster"
+import AlterProductMaster from "./components/AlterProductMaster"
+import ExecutiveMasterAlteredCheck from "./message/ExecutiveMasterAlteredCheck"
+import DistributorMasterAlteredCheck from "./message/DistributorMasterAlteredCheck"
+import ProductMasterAlteredCheck from "./message/ProductMasterAlteredCheck"
 
 
 function App() {
@@ -113,6 +120,27 @@ function App() {
 
          {/* http://localhost:4000/alterRegionMaster */}
          <Route path="alterRegionMaster/:regionMasterId" element = {<AlterRegionMaster />} />
+
+         {/* http://localhost:4000/alterExecutiveMaster */}
+         <Route path="alterExecutiveMaster/:executiveCode" element = {<AlterExecutiveMaster />} />
+
+         {/* http://localhost:4000/alterDistributorMaster */}
+         <Route path="alterDistributorMaster/:distributorCode" element = {<AlterDistributorMaster />} />
+
+         {/* http://localhost:4000/alterProductMaster */}
+         <Route path="alterProductMaster/:productCode" element = {<AlterProductMaster />} />
+
+         {/* http://localhost:4000/alteredRegion */}
+         <Route path="/alteredRegion" element = {<RegionMasterAlteredCheck />} />
+
+         {/* http://localhost:4000/alteredExecutive */}
+         <Route path="/alteredExecutive" element = {<ExecutiveMasterAlteredCheck /> } />
+
+         {/* http://localhost:4000/alteredDistributor */}
+         <Route path="/alteredDistributor" element = {<DistributorMasterAlteredCheck /> } />
+
+         {/* http://localhost:4000/alteredProduct */}
+         <Route path="/alteredProduct" element = {<ProductMasterAlteredCheck /> } />
 
 
           

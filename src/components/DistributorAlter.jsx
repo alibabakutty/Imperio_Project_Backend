@@ -10,6 +10,9 @@ const DistributorAlter = () => {
 
   const [distributor, setDistributor] = useState([]);
 
+
+  const [filteredDistributors, setFilteredDistributors] = useState([]);
+
   const inputRef = useRef(null);
 
 
@@ -19,11 +22,27 @@ const DistributorAlter = () => {
 
     listOfDistributors().then((response) =>{
       setDistributor(response.data);
+      setFilteredDistributors(response.data);
     }).catch(error =>{
       console.error(error);
     })
 
   }, []);
+
+
+  useEffect(() =>{
+    filterDistributor();
+  }, [distributorCode]);
+
+
+  const filterDistributor = () => {
+    if(distributorCode === ""){
+      setFilteredDistributors(distributor);
+    }else{
+      const filtered = distributor.filter(dis => dis.distributorCode.toLowerCase().includes(distributorCode.toLowerCase()));
+      setFilteredDistributors(filtered);
+    }
+  }
 
 
   return (
@@ -45,14 +64,14 @@ const DistributorAlter = () => {
                   </tr>
               </thead>
               <div className='border border-b-gray-500 w-[347px]'>
-                  <p className='ml-[285px] text-[14px]'>Create</p>
+                  <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/distributor"}><p className='ml-[285px] text-[14px]'>Create</p></Link>
                   <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={"/alter"}><p className='ml-[287px] text-[14px] '>Back</p></Link>
               </div>
               <tbody>
-                  {distributor.map(dis => (
+                  {filteredDistributors.map(dis => (
                       <tr key={dis.distributorCode}>
-                            <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={`/displayDistributor/${dis.distributorCode}`}>
-                              <td className='flex justify-center items-center'>{dis.distributorCode}</td>
+                            <Link className='block text-center text-[14px] focus:bg-[#FEB941] outline-none' to={`/alterDistributorMaster/${dis.distributorCode}`}>
+                              <td className='flex justify-center items-center capitalize'>{dis.distributorCode}</td>
                             </Link>
                       </tr>
                   ))}
