@@ -24,13 +24,7 @@ public class RegionMasterCreateDto {
 
     private String country;
 
-    private String ledgerCode;
 
-    private String ledgerName;
-
-    private String godownCode;
-
-    private String godownName;
 
 
 }

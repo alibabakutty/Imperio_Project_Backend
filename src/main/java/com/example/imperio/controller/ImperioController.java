@@ -90,6 +90,15 @@ public class ImperioController {
 
     }
 
+    @PostMapping("/addLedgerMaster")
+    public ResponseEntity<LedgerMasterCreateDto> createDtoResponseEntity(@RequestBody LedgerMasterCreateDto ledgerMasterCreateDto){
+
+        LedgerMasterCreateDto saveLedgerMaster = masterCreateService.createLedgerMaster(ledgerMasterCreateDto);
+
+        return new ResponseEntity<>(saveLedgerMaster, HttpStatus.CREATED);
+
+    }
+
 
 
 
@@ -159,6 +168,15 @@ public class ImperioController {
         VoucherTypeMasterCreateDto voucherTypeMasterCreateDto = masterCreateService.getVoucherTypeName(voucherTypeName);
 
         return ResponseEntity.ok(voucherTypeMasterCreateDto);
+
+    }
+
+    @GetMapping("/displayLedger/{ledgerCode}")
+    public ResponseEntity<LedgerMasterCreateDto> getDataLedgerCode(@PathVariable String ledgerCode){
+
+        LedgerMasterCreateDto ledgerMasterCreateDto = masterCreateService.getLedgerCode(ledgerCode);
+
+        return ResponseEntity.ok(ledgerMasterCreateDto);
 
     }
 
@@ -234,6 +252,15 @@ public class ImperioController {
 
     }
 
+    @GetMapping("/allLedgers")
+    public ResponseEntity<List<LedgerMasterCreateDto>> getAllLedgerMaster(){
+
+        List<LedgerMasterCreateDto> allLedgerMaster = masterCreateService.getAllLedgerCodes();
+
+        return ResponseEntity.ok(allLedgerMaster);
+
+    }
+
 
     //Build UPDATE Master REST API
     @PutMapping("/alterRegionMaster/{regionMasterId}")
@@ -286,6 +313,15 @@ public class ImperioController {
         VoucherTypeMasterCreateDto voucherTypeMasterCreateDto = masterCreateService.updateVoucherTypeMaster(voucherTypeName,updatedVoucherTypeMaster);
 
         return ResponseEntity.ok(voucherTypeMasterCreateDto);
+
+    }
+
+    @PutMapping("/alterLedgerMaster/{ledgerCode}")
+    public ResponseEntity<LedgerMasterCreateDto> updateLedgerMaster(@PathVariable String ledgerCode, @RequestBody LedgerMasterCreateDto updatedLedgerMaster){
+
+        LedgerMasterCreateDto ledgerMasterCreateDto = masterCreateService.updateLedgerMaster(ledgerCode,updatedLedgerMaster);
+
+        return ResponseEntity.ok(ledgerMasterCreateDto);
 
     }
 
@@ -356,9 +392,16 @@ public class ImperioController {
 
         masterCreateService.deleteVoucherTypeMaster(voucherTypeName);
 
-        return ResponseEntity.ok("Voucher Type Master delete successfully!.");
+        return ResponseEntity.ok("Voucher Type Master deleted successfully!.");
 
+    }
 
+    @DeleteMapping("/deleteLedger/{ledgerCode}")
+    public ResponseEntity<String> deleteLedgerMaster(@PathVariable String ledgerCode){
+
+        masterCreateService.deleteLedgerMaster(ledgerCode);
+
+        return ResponseEntity.ok("Ledger Master deleted successfully!.");
     }
 
 

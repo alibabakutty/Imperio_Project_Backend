@@ -95,4 +95,13 @@ public interface MasterCreateService {
 
     void deleteVoucherTypeMaster(String voucherTypeName);
 
+    LedgerMasterCreateDto createLedgerMaster(LedgerMasterCreateDto ledgerMasterCreateDto);
+
+    LedgerMasterCreateDto getLedgerCode(String ledgerCode);
+
+    List<LedgerMasterCreateDto> getAllLedgerCodes();
+
+    LedgerMasterCreateDto updateLedgerMaster(String ledgerCode, LedgerMasterCreateDto updatedLedgerMaster);
+
+    void deleteLedgerMaster(String ledgerCode);
 }

@@ -43,6 +43,9 @@ public class MasterCreateServiceImpl implements MasterCreateService {
     @Autowired
     private VoucherTypeMasterDAO voucherTypeMasterDAO;
 
+    @Autowired
+    private LedgerMasterDAO ledgerMasterDAO;
+
     @Override
     public RegionMasterCreateDto createRegionMaster(RegionMasterCreateDto regionMasterCreateDto){
 
@@ -52,10 +55,8 @@ public class MasterCreateServiceImpl implements MasterCreateService {
 
 
         // Check for duplicate entry
-        if(regionMasterDAO.existsByRegionMasterId(regionMasterCreateDto.getRegionMasterId())){
-
-            throw new DuplicateKeyException("Duplicate entry for unique field:" + regionMasterCreateDto.getRegionMasterId());
-
+        if (regionMasterDAO.existsByRegionMasterId(regionMasterCreateDto.getRegionMasterId())) {
+            throw new DuplicateKeyException("Duplicate entry for unique field: " + regionMasterCreateDto.getRegionMasterId());
         }
 
 
@@ -360,10 +361,6 @@ public class MasterCreateServiceImpl implements MasterCreateService {
         regionMasterCreate.setRegionName(updatedRegion.getRegionName());
         regionMasterCreate.setRegionState(updatedRegion.getRegionState());
         regionMasterCreate.setCountry(updatedRegion.getCountry());
-        regionMasterCreate.setLedgerCode(updatedRegion.getLedgerCode());
-        regionMasterCreate.setLedgerName(updatedRegion.getLedgerName());
-        regionMasterCreate.setGodownCode(updatedRegion.getGodownCode());
-        regionMasterCreate.setGodownName(updatedRegion.getGodownName());
 
         RegionMasterCreate regionMasterCreateObj = regionMasterDAO.save(regionMasterCreate);
 
@@ -659,6 +656,75 @@ public class MasterCreateServiceImpl implements MasterCreateService {
                 new ResourceNotFoundException("Voucher Type Name is not found with the given name:" + voucherTypeName));
 
         voucherTypeMasterDAO.deleteById(voucherTypeName);
+
+    }
+
+    @Override
+    public LedgerMasterCreateDto createLedgerMaster(LedgerMasterCreateDto ledgerMasterCreateDto){
+
+        // validate ledger object
+        validateLedgerTypeMaster(ledgerMasterCreateDto);
+
+        // check for duplicate entry
+        if(ledgerMasterDAO.existsByLedgerCode(ledgerMasterCreateDto.getLedgerCode())){
+            throw new DuplicateKeyException("Duplicate entry for unique field:" + ledgerMasterCreateDto.getLedgerCode());
+        };
+
+        LedgerMasterCreate ledgerMasterCreate = LedgerMasterCreateMapper.mapToLedgerMasterCreate(ledgerMasterCreateDto);
+
+        LedgerMasterCreate savedLedgerMasterCreate = ledgerMasterDAO.save(ledgerMasterCreate);
+
+        return LedgerMasterCreateMapper.mapToLedgerMasterCreateDto(savedLedgerMasterCreate);
+
+    }
+
+    private void validateLedgerTypeMaster(LedgerMasterCreateDto ledgerMasterCreateDto){
+        if(ledgerMasterCreateDto.getLedgerCode() == null || ledgerMasterCreateDto.getLedgerCode().isEmpty()){
+            throw new IllegalArgumentException("Unique field Cannot be empty");
+        }
+    }
+
+    @Override
+    public LedgerMasterCreateDto getLedgerCode(String ledgerCode){
+        LedgerMasterCreate ledgerMasterCreate = ledgerMasterDAO.findById(ledgerCode).orElseThrow(()->
+
+                new ResourceNotFoundException("Ledger Code is not found with this name:" + ledgerCode));
+
+        return LedgerMasterCreateMapper.mapToLedgerMasterCreateDto(ledgerMasterCreate);
+    }
+
+    @Override
+    public List<LedgerMasterCreateDto> getAllLedgerCodes(){
+        List<LedgerMasterCreate> ledgerMasterCreate = ledgerMasterDAO.findAll();
+
+        return ledgerMasterCreate.stream().map(LedgerMasterCreateMapper::mapToLedgerMasterCreateDto).toList();
+
+    }
+
+
+    @Override
+    public LedgerMasterCreateDto updateLedgerMaster(String ledgerCode, LedgerMasterCreateDto updatedLedgerMaster){
+
+        LedgerMasterCreate ledgerMasterCreate = ledgerMasterDAO.findById(ledgerCode).orElseThrow(()->
+
+                new ResourceNotFoundException("Ledger Code is not found with this name:" + ledgerCode));
+
+        ledgerMasterCreate.setLedgerCode(updatedLedgerMaster.getLedgerCode());
+        ledgerMasterCreate.setLedgerName(updatedLedgerMaster.getLedgerName());
+
+        LedgerMasterCreate ledgerMasterCreateObj = ledgerMasterDAO.save(ledgerMasterCreate);
+
+        return LedgerMasterCreateMapper.mapToLedgerMasterCreateDto(ledgerMasterCreateObj);
+
+    }
+
+    @Override
+    public void deleteLedgerMaster(String ledgerCode){
+        LedgerMasterCreate ledgerMasterCreate = ledgerMasterDAO.findById(ledgerCode).orElseThrow(()->
+
+                new ResourceNotFoundException("Ledger Code is not found with this name:" + ledgerCode));
+
+        ledgerMasterDAO.deleteById(ledgerCode);
 
     }
 
