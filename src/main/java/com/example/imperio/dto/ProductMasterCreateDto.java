@@ -23,4 +23,12 @@ public class ProductMasterCreateDto {
 
 
     private String productUom;
+
+    private String productGroup;
+
+    private Long standardCost;
+
+    private Long sellingPrice;
+
+    private Long discount;
 }

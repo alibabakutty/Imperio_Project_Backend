@@ -1,23 +1,11 @@
 package com.example.imperio.service.impl;
 
 
-import com.example.imperio.dto.DistributorMasterCreateDto;
-import com.example.imperio.dto.ExecutiveMasterCreateDto;
-import com.example.imperio.dto.ProductMasterCreateDto;
-import com.example.imperio.dto.RegionMasterCreateDto;
-import com.example.imperio.entity.DistributorMasterCreate;
-import com.example.imperio.entity.ExecutiveMasterCreate;
-import com.example.imperio.entity.ProductMasterCreate;
-import com.example.imperio.entity.RegionMasterCreate;
+import com.example.imperio.dto.*;
+import com.example.imperio.entity.*;
 import com.example.imperio.exception.ResourceNotFoundException;
-import com.example.imperio.mapper.DistributorMasterCreateMapper;
-import com.example.imperio.mapper.ExecutiveMasterCreateMapper;
-import com.example.imperio.mapper.ProductMasterCreateMapper;
-import com.example.imperio.mapper.RegionMasterCreateMapper;
-import com.example.imperio.repository.DistributorMasterDAO;
-import com.example.imperio.repository.ExecutiveMasterDAO;
-import com.example.imperio.repository.ProductMasterDAO;
-import com.example.imperio.repository.RegionMasterDAO;
+import com.example.imperio.mapper.*;
+import com.example.imperio.repository.*;
 import com.example.imperio.service.MasterCreateService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +30,18 @@ public class MasterCreateServiceImpl implements MasterCreateService {
 
     @Autowired
     private ProductMasterDAO productMasterDAO;
+
+    @Autowired
+    private GodownMasterCreateDAO godownMasterCreateDAO;
+
+    @Autowired
+    private UnitMasterDAO unitMasterDAO;
+
+    @Autowired
+    private VoucherTypeDAO voucherTypeDAO;
+
+    @Autowired
+    private VoucherTypeMasterDAO voucherTypeMasterDAO;
 
     @Override
     public RegionMasterCreateDto createRegionMaster(RegionMasterCreateDto regionMasterCreateDto){
@@ -248,6 +248,106 @@ public class MasterCreateServiceImpl implements MasterCreateService {
 
     }
 
+    @Override
+    public GodownMasterCreateDto createGodownMaster(GodownMasterCreateDto godownMasterCreateDto){
+
+
+        // Validate the region object
+        validateGodownMaster(godownMasterCreateDto);
+
+
+        // Check for duplicate entry
+        if(godownMasterCreateDAO.existsByGodownCode(godownMasterCreateDto.getGodownCode())){
+            throw new DuplicateKeyException("Duplicate entry for unique field:" + godownMasterCreateDto.getGodownCode());
+        }
+
+
+        GodownMasterCreate godownMasterCreate = GodownMasterCreateMapper.mapToGodownMasterCreate(godownMasterCreateDto);
+
+        GodownMasterCreate savedGodownMasterCreate = godownMasterCreateDAO.save(godownMasterCreate);
+
+        return GodownMasterCreateMapper.mapToGodownMasterCreateDto(savedGodownMasterCreate);
+
+    }
+
+
+    private void validateGodownMaster(GodownMasterCreateDto godownMasterCreateDto){
+        if(godownMasterCreateDto.getGodownCode() == null || godownMasterCreateDto.getGodownCode().isEmpty()){
+            throw new IllegalArgumentException("Unique field cannot be empty");
+        }
+    }
+
+
+
+
+    @Override
+    public GodownMasterCreateDto getGodownMaster(String godownCode){
+        GodownMasterCreate godownMasterCreate = godownMasterCreateDAO.findById(godownCode).orElseThrow(()->
+
+                new ResourceNotFoundException("Godown is not found with this name:" + godownCode));
+
+        return GodownMasterCreateMapper.mapToGodownMasterCreateDto(godownMasterCreate);
+
+    }
+
+
+    @Override
+    public List<GodownMasterCreateDto> getAllGodownMasterCodes(){
+
+        List<GodownMasterCreate> godownMasterCreate = godownMasterCreateDAO.findAll();
+
+
+        return godownMasterCreate.stream().map(GodownMasterCreateMapper::mapToGodownMasterCreateDto).toList();
+
+    }
+
+
+    @Override
+    public UnitMasterCreateDto createUnitMaster(UnitMasterCreateDto unitMasterCreateDto){
+
+        // Validate the unit object
+        validateUnitMaster(unitMasterCreateDto);
+
+        // Check for duplicate entry
+        if(unitMasterDAO.existsByUom(unitMasterCreateDto.getUom())){
+            throw new DuplicateKeyException("Duplicate entry for unique field:" + unitMasterCreateDto.getUom());
+        }
+
+        UnitMasterCreate unitMasterCreate = UnitMasterCreateMapper.mapToUnitMasterCreate(unitMasterCreateDto);
+
+        UnitMasterCreate savedUnitMasterCreate = unitMasterDAO.save(unitMasterCreate);
+
+        return UnitMasterCreateMapper.mapToUnitMasterCreateDto(savedUnitMasterCreate);
+
+    }
+
+
+    private void validateUnitMaster(UnitMasterCreateDto unitMasterCreateDto){
+        if(unitMasterCreateDto.getUom() == null || unitMasterCreateDto.getUom().isEmpty()){
+            throw new IllegalArgumentException("Unique field cannot be empty!");
+        }
+    }
+
+    @Override
+    public UnitMasterCreateDto getUnitMaster(String uom){
+        UnitMasterCreate unitMasterCreate = unitMasterDAO.findById(uom).orElseThrow(()->
+
+                new ResourceNotFoundException("Unit is not found with this name:" + uom));
+
+        return UnitMasterCreateMapper.mapToUnitMasterCreateDto(unitMasterCreate);
+
+
+    }
+
+    @Override
+    public List<UnitMasterCreateDto> getAllUnits(){
+
+        List<UnitMasterCreate> unitMasterCreate = unitMasterDAO.findAll();
+
+        return unitMasterCreate.stream().map(UnitMasterCreateMapper::mapToUnitMasterCreateDto).toList();
+
+    }
+
 
     @Override
     public RegionMasterCreateDto updateRegion(String regionMasterId, RegionMasterCreateDto updatedRegion){
@@ -260,6 +360,10 @@ public class MasterCreateServiceImpl implements MasterCreateService {
         regionMasterCreate.setRegionName(updatedRegion.getRegionName());
         regionMasterCreate.setRegionState(updatedRegion.getRegionState());
         regionMasterCreate.setCountry(updatedRegion.getCountry());
+        regionMasterCreate.setLedgerCode(updatedRegion.getLedgerCode());
+        regionMasterCreate.setLedgerName(updatedRegion.getLedgerName());
+        regionMasterCreate.setGodownCode(updatedRegion.getGodownCode());
+        regionMasterCreate.setGodownName(updatedRegion.getGodownName());
 
         RegionMasterCreate regionMasterCreateObj = regionMasterDAO.save(regionMasterCreate);
 
@@ -326,12 +430,30 @@ public class MasterCreateServiceImpl implements MasterCreateService {
         productMasterCreate.setProductDescription(updatedProduct.getProductDescription());
         productMasterCreate.setProductCategory(updatedProduct.getProductCategory());
         productMasterCreate.setProductUom(updatedProduct.getProductUom());
+        productMasterCreate.setProductGroup(updatedProduct.getProductGroup());
+        productMasterCreate.setStandardCost(updatedProduct.getStandardCost());
+        productMasterCreate.setSellingPrice(updatedProduct.getSellingPrice());
+        productMasterCreate.setDiscount(updatedProduct.getDiscount());
 
         ProductMasterCreate productMasterCreateObj = productMasterDAO.save(productMasterCreate);
 
         return ProductMasterCreateMapper.mapToProductMasterCreateDto(productMasterCreateObj);
 
 
+    }
+
+    @Override
+    public  GodownMasterCreateDto updateGodown(String godownCode, GodownMasterCreateDto updatedGodown){
+        GodownMasterCreate godownMasterCreate = godownMasterCreateDAO.findById(godownCode).orElseThrow(()->
+                new ResourceNotFoundException("Godown is not found with the given name:" + godownCode));
+
+
+        godownMasterCreate.setGodownCode(updatedGodown.getGodownCode());
+        godownMasterCreate.setGodownName(updatedGodown.getGodownName());
+
+        GodownMasterCreate godownMasterCreateObj = godownMasterCreateDAO.save(godownMasterCreate);
+
+        return GodownMasterCreateMapper.mapToGodownMasterCreateDto(godownMasterCreateObj);
     }
 
     @Override
@@ -376,6 +498,168 @@ public class MasterCreateServiceImpl implements MasterCreateService {
 
     }
 
+    @Override
+    public void deleteGodown(String godownCode){
+        GodownMasterCreate godownMasterCreate = godownMasterCreateDAO.findById(godownCode).orElseThrow(()->
 
+                new ResourceNotFoundException("Godown is not exists with the given name:" + godownCode));
+
+        godownMasterCreateDAO.deleteById(godownCode);
+    }
+
+    @Override
+    public void deleteUnit(String uom){
+
+        UnitMasterCreate unitMasterCreate = unitMasterDAO.findById(uom).orElseThrow(()->
+
+                new ResourceNotFoundException("Units is not found with this name:" + uom));
+
+        unitMasterDAO.deleteById(uom);
+
+    }
+
+    @Override
+    public VoucherTypeCreateDto createVoucherType(VoucherTypeCreateDto voucherTypeCreateDto){
+
+        //validate voucher type object
+        validateVoucher(voucherTypeCreateDto);
+
+        //check for duplicate entry
+        if(voucherTypeDAO.existsByVoucherType(voucherTypeCreateDto.getVoucherType())){
+            throw new DuplicateKeyException("Duplicate entry for unique field:" + voucherTypeCreateDto.getVoucherType());
+        }
+
+        VoucherTypeCreate voucherTypeCreate = VoucherTypeMapper.mapToVoucherTypeMasterCreate(voucherTypeCreateDto);
+
+        VoucherTypeCreate savedVoucherTypeCreate = voucherTypeDAO.save(voucherTypeCreate);
+
+        return VoucherTypeMapper.mapToVoucherTypeMasterCreateDto(savedVoucherTypeCreate);
+
+    };
+
+
+    private void validateVoucher(VoucherTypeCreateDto voucherTypeCreateDto){
+
+        if(voucherTypeCreateDto.getVoucherType() == null || voucherTypeCreateDto.getVoucherType().isEmpty()){
+            throw new IllegalArgumentException("Unique field cannot be empty");
+        }
+    }
+
+    @Override
+    public VoucherTypeCreateDto getVoucherType(String voucherType){
+
+        VoucherTypeCreate voucherTypeCreate = voucherTypeDAO.findById(voucherType).orElseThrow(() ->
+
+                new ResourceNotFoundException("Voucher Type is not found with this name:" + voucherType));
+
+        return VoucherTypeMapper.mapToVoucherTypeMasterCreateDto(voucherTypeCreate);
+    }
+
+    @Override
+    public List<VoucherTypeCreateDto> getAllVoucherTypes(){
+
+        List<VoucherTypeCreate> voucherTypeCreate = voucherTypeDAO.findAll();
+
+        return voucherTypeCreate.stream().map(VoucherTypeMapper::mapToVoucherTypeMasterCreateDto).toList();
+    }
+
+    @Override
+    public void deleteVoucherType(String voucherType){
+        VoucherTypeCreate voucherTypeCreate = voucherTypeDAO.findById(voucherType).orElseThrow(()->
+
+                new ResourceNotFoundException("Voucher Type is not found with this name:" + voucherType));
+
+        voucherTypeDAO.deleteById(voucherType);
+    }
+
+    @Override
+    public VoucherTypeMasterCreateDto createVoucherTypeMaster(VoucherTypeMasterCreateDto voucherTypeMasterCreateDto){
+
+        //validate voucher type name object
+        validateVoucherTypeMaster(voucherTypeMasterCreateDto);
+
+        //check for duplicate entry
+        if(voucherTypeMasterDAO.existsByVoucherTypeName(voucherTypeMasterCreateDto.getVoucherTypeName())){
+            throw new DuplicateKeyException("Duplicate entry for unique field:" + voucherTypeMasterCreateDto.getVoucherTypeName());
+        }
+
+        VoucherTypeMasterCreate voucherTypeMasterCreate = VoucherTypeMasterCreateMapper.mapToVoucherTypeMasterCreate(voucherTypeMasterCreateDto);
+
+        VoucherTypeMasterCreate savedVoucherTypeMasterCreate = voucherTypeMasterDAO.save(voucherTypeMasterCreate);
+
+        return VoucherTypeMasterCreateMapper.mapToVoucherTypeMasterCreateDto(savedVoucherTypeMasterCreate);
+
+
+    };
+
+
+    private void validateVoucherTypeMaster(VoucherTypeMasterCreateDto voucherTypeMasterCreateDto){
+
+        if(voucherTypeMasterCreateDto.getVoucherTypeName() == null || voucherTypeMasterCreateDto.getVoucherTypeName().isEmpty()){
+            throw new IllegalArgumentException("Unique field cannot be empty");
+        }
+    }
+
+    @Override
+    public VoucherTypeMasterCreateDto getVoucherTypeName(String voucherTypeName){
+        VoucherTypeMasterCreate voucherTypeMasterCreate = voucherTypeMasterDAO.findById(voucherTypeName).orElseThrow(() ->
+
+                new ResourceNotFoundException("Voucher Type Name is not found with this name:" + voucherTypeName));
+
+        return VoucherTypeMasterCreateMapper.mapToVoucherTypeMasterCreateDto(voucherTypeMasterCreate);
+
+    }
+
+    @Override
+    public List<VoucherTypeMasterCreateDto> getAllVoucherTypeNames(){
+
+        List<VoucherTypeMasterCreate> voucherTypeMasterCreate = voucherTypeMasterDAO.findAll();
+
+        return voucherTypeMasterCreate.stream().map(VoucherTypeMasterCreateMapper::mapToVoucherTypeMasterCreateDto).toList();
+    }
+
+
+    @Override
+    public VoucherTypeMasterCreateDto updateVoucherTypeMaster(String voucherTypeName, VoucherTypeMasterCreateDto updatedVoucherTypeMaster){
+
+        VoucherTypeMasterCreate voucherTypeMasterCreate = voucherTypeMasterDAO.findById(voucherTypeName).orElseThrow(()->
+
+                new ResourceNotFoundException("Voucher Type Name is not found with the given name:" + voucherTypeName));
+
+        voucherTypeMasterCreate.setVoucherTypeName(updatedVoucherTypeMaster.getVoucherTypeName());
+        voucherTypeMasterCreate.setVoucherType(updatedVoucherTypeMaster.getVoucherType());
+        voucherTypeMasterCreate.setMethodOfVoucherNumbering(updatedVoucherTypeMaster.getMethodOfVoucherNumbering());
+        voucherTypeMasterCreate.setAlterAdditionalNumberingDetails(updatedVoucherTypeMaster.getAlterAdditionalNumberingDetails());
+        voucherTypeMasterCreate.setStartingNumber(updatedVoucherTypeMaster.getStartingNumber());
+        voucherTypeMasterCreate.setWidthOfNumericalPart(updatedVoucherTypeMaster.getWidthOfNumericalPart());
+        voucherTypeMasterCreate.setPrefillWithZero(updatedVoucherTypeMaster.getPrefillWithZero());
+        voucherTypeMasterCreate.setRestartNumberingApplicationForm(updatedVoucherTypeMaster.getRestartNumberingApplicationForm());
+        voucherTypeMasterCreate.setRestartNumberingStartingNumber(updatedVoucherTypeMaster.getRestartNumberingStartingNumber());
+        voucherTypeMasterCreate.setRestartNumberingPeriodicity(updatedVoucherTypeMaster.getRestartNumberingPeriodicity());
+        voucherTypeMasterCreate.setPrefixDetailsApplicationForm(updatedVoucherTypeMaster.getPrefixDetailsApplicationForm());
+        voucherTypeMasterCreate.setPrefixDetailsParticulars(updatedVoucherTypeMaster.getPrefixDetailsParticulars());
+        voucherTypeMasterCreate.setSuffixDetailsApplicationForm(updatedVoucherTypeMaster.getSuffixDetailsApplicationForm());
+        voucherTypeMasterCreate.setSuffixDetailsParticulars(updatedVoucherTypeMaster.getSuffixDetailsParticulars());
+        voucherTypeMasterCreate.setPrintingVoucherAfterSaving(updatedVoucherTypeMaster.getPrintingVoucherAfterSaving());
+        voucherTypeMasterCreate.setNameOfClass(updatedVoucherTypeMaster.getNameOfClass());
+
+
+        VoucherTypeMasterCreate voucherTypeMasterCreateObj = voucherTypeMasterDAO.save(voucherTypeMasterCreate);
+
+        return VoucherTypeMasterCreateMapper.mapToVoucherTypeMasterCreateDto(voucherTypeMasterCreateObj);
+
+    }
+
+
+    @Override
+    public void deleteVoucherTypeMaster(String voucherTypeName){
+
+        VoucherTypeMasterCreate voucherTypeMasterCreate = voucherTypeMasterDAO.findById(voucherTypeName).orElseThrow(()->
+
+                new ResourceNotFoundException("Voucher Type Name is not found with the given name:" + voucherTypeName));
+
+        voucherTypeMasterDAO.deleteById(voucherTypeName);
+
+    }
 
 }

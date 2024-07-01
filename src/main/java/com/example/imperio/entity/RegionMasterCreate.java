@@ -31,4 +31,17 @@ public class RegionMasterCreate {
 
     @Column(name = "country")
     private String country;
+
+    @Column(name = "ledger_code")
+    private String ledgerCode;
+
+    @Column(name = "ledger_name")
+    private String ledgerName;
+
+    @Column(name = "godown_code")
+    private String godownCode;
+
+    @Column(name = "godown_name")
+    private String godownName;
+
 }

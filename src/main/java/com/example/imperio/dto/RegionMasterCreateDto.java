@@ -18,12 +18,19 @@ public class RegionMasterCreateDto {
 
     private String regionMasterId;
 
-
     private String regionName;
-
 
     private String regionState;
 
-
     private String country;
+
+    private String ledgerCode;
+
+    private String ledgerName;
+
+    private String godownCode;
+
+    private String godownName;
+
+
 }
