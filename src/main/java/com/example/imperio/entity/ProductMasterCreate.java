@@ -29,5 +29,17 @@ public class ProductMasterCreate {
     @Column(name = "product_uom")
     private String productUom;
 
+    @Column(name = "product_group")
+    private String productGroup;
+
+    @Column(name = "standard_cost")
+    private Long standardCost;
+
+    @Column(name = "selling_price")
+    private Long sellingPrice;
+
+    @Column(name = "discount")
+    private Long discount;
+
 
 }

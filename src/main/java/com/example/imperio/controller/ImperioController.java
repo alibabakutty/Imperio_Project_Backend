@@ -1,11 +1,9 @@
 package com.example.imperio.controller;
 
 
-import com.example.imperio.dto.DistributorMasterCreateDto;
-import com.example.imperio.dto.ExecutiveMasterCreateDto;
-import com.example.imperio.dto.ProductMasterCreateDto;
-import com.example.imperio.dto.RegionMasterCreateDto;
+import com.example.imperio.dto.*;
 import com.example.imperio.service.MasterCreateService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Setter
 @CrossOrigin("http://localhost:4000")
 @RestController
 @RequestMapping("/api/master")
@@ -55,6 +54,45 @@ public class ImperioController {
         return new ResponseEntity<>(saveProductMaster, HttpStatus.CREATED);
     }
 
+
+    @PostMapping("/addGodown")
+    public ResponseEntity<GodownMasterCreateDto> createDtoResponseEntity(@RequestBody GodownMasterCreateDto godownMasterCreateDto){
+        GodownMasterCreateDto saveGodownMaster = masterCreateService.createGodownMaster(godownMasterCreateDto);
+
+        return new ResponseEntity<>(saveGodownMaster, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addUnit")
+    public ResponseEntity<UnitMasterCreateDto> createDtoResponseEntity(@RequestBody UnitMasterCreateDto unitMasterCreateDto){
+
+        UnitMasterCreateDto saveUnitMaster = masterCreateService.createUnitMaster(unitMasterCreateDto);
+
+        return new ResponseEntity<>(saveUnitMaster, HttpStatus.CREATED);
+
+    }
+
+    @PostMapping("/addVoucherType")
+    public ResponseEntity<VoucherTypeCreateDto> createDtoResponseEntity(@RequestBody VoucherTypeCreateDto voucherTypeCreateDto){
+
+        VoucherTypeCreateDto saveVoucherTypeMaster = masterCreateService.createVoucherType(voucherTypeCreateDto);
+
+        return new ResponseEntity<>(saveVoucherTypeMaster, HttpStatus.CREATED);
+
+    }
+
+
+    @PostMapping("/addVoucherTypeMaster")
+    public ResponseEntity<VoucherTypeMasterCreateDto> createDtoResponseEntity(@RequestBody VoucherTypeMasterCreateDto voucherTypeMasterCreateDto){
+
+        VoucherTypeMasterCreateDto saveVoucherTypeNameMaster = masterCreateService.createVoucherTypeMaster(voucherTypeMasterCreateDto);
+
+        return new ResponseEntity<>(saveVoucherTypeNameMaster, HttpStatus.CREATED);
+
+    }
+
+
+
+
     //Build GET Master Ids REST API
     @GetMapping("/displayRegion/{regionMasterId}")
     public ResponseEntity<RegionMasterCreateDto> getDataByRegionMasterId(@PathVariable String regionMasterId){
@@ -87,6 +125,41 @@ public class ImperioController {
         ProductMasterCreateDto productMasterCreateDto = masterCreateService.getProductMaster(productCode);
 
         return ResponseEntity.ok(productMasterCreateDto);
+    }
+
+
+    @GetMapping("/displayGodown/{godownCode}")
+    public ResponseEntity<GodownMasterCreateDto> getDataByGodownCode(@PathVariable String godownCode){
+
+        GodownMasterCreateDto godownMasterCreateDto = masterCreateService.getGodownMaster(godownCode);
+
+        return ResponseEntity.ok(godownMasterCreateDto);
+    }
+
+    @GetMapping("/displayUnit/{uom}")
+    public ResponseEntity<UnitMasterCreateDto> getDataByUom(@PathVariable String uom){
+        UnitMasterCreateDto unitMasterCreateDto = masterCreateService.getUnitMaster(uom);
+
+        return ResponseEntity.ok(unitMasterCreateDto);
+    }
+
+    @GetMapping("/displayVoucherType/{voucherType}")
+    public ResponseEntity<VoucherTypeCreateDto> getDataByVoucherType(@PathVariable String voucherType){
+
+        VoucherTypeCreateDto voucherTypeCreateDto =masterCreateService.getVoucherType(voucherType);
+
+        return ResponseEntity.ok(voucherTypeCreateDto);
+
+    }
+
+
+    @GetMapping("/displayVoucherTypeName/{voucherTypeName}")
+    public ResponseEntity<VoucherTypeMasterCreateDto> getDataVoucherTypeName(@PathVariable String voucherTypeName){
+
+        VoucherTypeMasterCreateDto voucherTypeMasterCreateDto = masterCreateService.getVoucherTypeName(voucherTypeName);
+
+        return ResponseEntity.ok(voucherTypeMasterCreateDto);
+
     }
 
 
@@ -126,6 +199,42 @@ public class ImperioController {
     }
 
 
+    @GetMapping("/allGodown")
+    public ResponseEntity<List<GodownMasterCreateDto>> getAllGodownMasterCodes(){
+
+        List<GodownMasterCreateDto> allGodownMaster = masterCreateService.getAllGodownMasterCodes();
+
+
+        return ResponseEntity.ok(allGodownMaster);
+    }
+
+    @GetMapping("/allUnits")
+    public ResponseEntity<List<UnitMasterCreateDto>> getAllUnits(){
+
+        List<UnitMasterCreateDto> allUnits = masterCreateService.getAllUnits();
+
+        return ResponseEntity.ok(allUnits);
+    }
+
+    @GetMapping("/allVoucherTypes")
+    public ResponseEntity<List<VoucherTypeCreateDto>> getAllVoucherType(){
+
+        List<VoucherTypeCreateDto> allVoucherTypes = masterCreateService.getAllVoucherTypes();
+
+        return ResponseEntity.ok(allVoucherTypes);
+
+    }
+
+    @GetMapping("/allVoucherTypeMaster")
+    public ResponseEntity<List<VoucherTypeMasterCreateDto>> getAllVoucherTypeMaster(){
+
+        List<VoucherTypeMasterCreateDto> allVoucherTypeMaster = masterCreateService.getAllVoucherTypeNames();
+
+        return ResponseEntity.ok(allVoucherTypeMaster);
+
+    }
+
+
     //Build UPDATE Master REST API
     @PutMapping("/alterRegionMaster/{regionMasterId}")
     public ResponseEntity<RegionMasterCreateDto> updateRegion(@PathVariable String regionMasterId, @RequestBody RegionMasterCreateDto updatedRegion){
@@ -160,6 +269,27 @@ public class ImperioController {
     }
 
 
+
+    @PutMapping("/alterGodownMaster/{godownCode}")
+    public ResponseEntity<GodownMasterCreateDto> updateGodown(@PathVariable String godownCode,@RequestBody GodownMasterCreateDto updatedGodown){
+
+        GodownMasterCreateDto godownMasterCreateDto = masterCreateService.updateGodown(godownCode,updatedGodown);
+
+        return ResponseEntity.ok(godownMasterCreateDto);
+
+    }
+
+
+    @PutMapping("/alterVoucherTypeMaster/{voucherTypeName}")
+    public ResponseEntity<VoucherTypeMasterCreateDto> updateVoucherTypeMaster(@PathVariable String voucherTypeName, @RequestBody VoucherTypeMasterCreateDto updatedVoucherTypeMaster){
+
+        VoucherTypeMasterCreateDto voucherTypeMasterCreateDto = masterCreateService.updateVoucherTypeMaster(voucherTypeName,updatedVoucherTypeMaster);
+
+        return ResponseEntity.ok(voucherTypeMasterCreateDto);
+
+    }
+
+
     //Build DELETE Ledger REST API
     @DeleteMapping("/deleteRegion/{regionMasterId}")
     public ResponseEntity<String> deleteRegion(@PathVariable String regionMasterId){
@@ -191,8 +321,48 @@ public class ImperioController {
 
         masterCreateService.deleteProduct(productCode);
 
-        return ResponseEntity.ok("Product deleted successfully!>");
+        return ResponseEntity.ok("Product deleted successfully!.");
     }
+
+
+    @DeleteMapping("/deleteGodown/{godownCode}")
+    public ResponseEntity<String> deleteGodown(@PathVariable String godownCode){
+
+        masterCreateService.deleteGodown(godownCode);
+
+
+        return ResponseEntity.ok("Godown deleted successfully!.");
+
+    }
+
+    @DeleteMapping("/deleteUnit/{uom}")
+    public ResponseEntity<String> deleteUnit(@PathVariable String uom){
+
+        masterCreateService.deleteUnit(uom);
+
+        return ResponseEntity.ok("Unit deleted successfully!.");
+    }
+
+    @DeleteMapping("/deleteVoucherType/{voucherType}")
+    public ResponseEntity<String> deleteVoucherTypes(@PathVariable String voucherType){
+
+        masterCreateService.deleteVoucherType(voucherType);
+
+        return ResponseEntity.ok("Voucher Type deleted successfully!.");
+    }
+
+    @DeleteMapping("/deleteVoucherTypeMaster/{voucherTypeName}")
+    public ResponseEntity<String> deleteVoucherTypeMaster(@PathVariable String voucherTypeName){
+
+        masterCreateService.deleteVoucherTypeMaster(voucherTypeName);
+
+        return ResponseEntity.ok("Voucher Type Master delete successfully!.");
+
+
+    }
+
+
+    // Testing
 
 
 }

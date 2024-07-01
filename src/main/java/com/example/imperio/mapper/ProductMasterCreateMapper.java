@@ -13,7 +13,11 @@ public class ProductMasterCreateMapper {
                 productMasterCreate.getProductCode(),
                 productMasterCreate.getProductDescription(),
                 productMasterCreate.getProductCategory(),
-                productMasterCreate.getProductUom()
+                productMasterCreate.getProductUom(),
+                productMasterCreate.getProductGroup(),
+                productMasterCreate.getStandardCost(),
+                productMasterCreate.getSellingPrice(),
+                productMasterCreate.getDiscount()
         );
     }
 
@@ -26,7 +30,11 @@ public class ProductMasterCreateMapper {
                 productMasterCreateDto.getProductCode(),
                 productMasterCreateDto.getProductDescription(),
                 productMasterCreateDto.getProductCategory(),
-                productMasterCreateDto.getProductUom()
+                productMasterCreateDto.getProductUom(),
+                productMasterCreateDto.getProductGroup(),
+                productMasterCreateDto.getStandardCost(),
+                productMasterCreateDto.getSellingPrice(),
+                productMasterCreateDto.getDiscount()
         );
     }
 }

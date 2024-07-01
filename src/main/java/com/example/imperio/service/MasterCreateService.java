@@ -1,9 +1,6 @@
 package com.example.imperio.service;
 
-import com.example.imperio.dto.DistributorMasterCreateDto;
-import com.example.imperio.dto.ExecutiveMasterCreateDto;
-import com.example.imperio.dto.ProductMasterCreateDto;
-import com.example.imperio.dto.RegionMasterCreateDto;
+import com.example.imperio.dto.*;
 
 import java.util.List;
 
@@ -42,6 +39,7 @@ public interface MasterCreateService {
 
     List<ProductMasterCreateDto> getAllProductMasterCodes();
 
+
     RegionMasterCreateDto updateRegion(String regionMasterId, RegionMasterCreateDto updatedRegion);
 
     ExecutiveMasterCreateDto updateExecutive(String executiveCode, ExecutiveMasterCreateDto updatedExecutive);
@@ -57,4 +55,44 @@ public interface MasterCreateService {
     void deleteDistributor(String distributorCode);
 
     void deleteProduct(String productCode);
+
+
+    GodownMasterCreateDto createGodownMaster(GodownMasterCreateDto godownMasterCreateDto);
+
+
+
+    GodownMasterCreateDto getGodownMaster(String godownCode);
+
+    List<GodownMasterCreateDto> getAllGodownMasterCodes();
+
+    GodownMasterCreateDto updateGodown(String godownCode, GodownMasterCreateDto updatedGodown);
+
+    void deleteGodown(String godownCode);
+
+    UnitMasterCreateDto createUnitMaster(UnitMasterCreateDto unitMasterCreateDto);
+
+    UnitMasterCreateDto getUnitMaster(String uom);
+
+    List<UnitMasterCreateDto> getAllUnits();
+
+    void deleteUnit(String uom);
+
+    VoucherTypeCreateDto createVoucherType(VoucherTypeCreateDto voucherTypeCreateDto);
+
+    VoucherTypeCreateDto getVoucherType(String voucherType);
+
+    List<VoucherTypeCreateDto> getAllVoucherTypes();
+
+    void deleteVoucherType(String voucherType);
+
+    VoucherTypeMasterCreateDto createVoucherTypeMaster(VoucherTypeMasterCreateDto voucherTypeMasterCreateDto);
+
+    VoucherTypeMasterCreateDto getVoucherTypeName(String voucherTypeName);
+
+    List<VoucherTypeMasterCreateDto> getAllVoucherTypeNames();
+
+    VoucherTypeMasterCreateDto updateVoucherTypeMaster(String voucherTypeName, VoucherTypeMasterCreateDto updatedVoucherTypeMaster);
+
+    void deleteVoucherTypeMaster(String voucherTypeName);
+
 }

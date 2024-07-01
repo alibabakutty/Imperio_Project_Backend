@@ -12,7 +12,11 @@ public class RegionMasterCreateMapper {
                 regionmastercreate.getRegionMasterId(),
                 regionmastercreate.getRegionName(),
                 regionmastercreate.getRegionState(),
-                regionmastercreate.getCountry()
+                regionmastercreate.getCountry(),
+                regionmastercreate.getLedgerCode(),
+                regionmastercreate.getLedgerName(),
+                regionmastercreate.getGodownCode(),
+                regionmastercreate.getGodownName()
         );
     }
 
@@ -23,7 +27,11 @@ public class RegionMasterCreateMapper {
                 regionmastercreatedto.getRegionMasterId(),
                 regionmastercreatedto.getRegionName(),
                 regionmastercreatedto.getRegionState(),
-                regionmastercreatedto.getCountry()
+                regionmastercreatedto.getCountry(),
+                regionmastercreatedto.getLedgerCode(),
+                regionmastercreatedto.getLedgerName(),
+                regionmastercreatedto.getGodownCode(),
+                regionmastercreatedto.getGodownName()
         );
     }
 
