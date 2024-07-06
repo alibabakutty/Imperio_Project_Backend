@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UnitMasterDAO extends JpaRepository<UnitMasterCreate,String> {
 
-    boolean existsByUom(String uom);
+    boolean existsByProductUom(String productUom);
 }

@@ -145,9 +145,9 @@ public class ImperioController {
         return ResponseEntity.ok(godownMasterCreateDto);
     }
 
-    @GetMapping("/displayUnit/{uom}")
-    public ResponseEntity<UnitMasterCreateDto> getDataByUom(@PathVariable String uom){
-        UnitMasterCreateDto unitMasterCreateDto = masterCreateService.getUnitMaster(uom);
+    @GetMapping("/displayUnit/{productUom}")
+    public ResponseEntity<UnitMasterCreateDto> getDataByUom(@PathVariable String productUom){
+        UnitMasterCreateDto unitMasterCreateDto = masterCreateService.getUnitMaster(productUom);
 
         return ResponseEntity.ok(unitMasterCreateDto);
     }
@@ -371,10 +371,10 @@ public class ImperioController {
 
     }
 
-    @DeleteMapping("/deleteUnit/{uom}")
-    public ResponseEntity<String> deleteUnit(@PathVariable String uom){
+    @DeleteMapping("/deleteUnit/{productUom}")
+    public ResponseEntity<String> deleteUnit(@PathVariable String productUom){
 
-        masterCreateService.deleteUnit(uom);
+        masterCreateService.deleteUnit(productUom);
 
         return ResponseEntity.ok("Unit deleted successfully!.");
     }

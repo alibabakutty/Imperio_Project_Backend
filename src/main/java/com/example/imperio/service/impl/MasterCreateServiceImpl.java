@@ -310,8 +310,8 @@ public class MasterCreateServiceImpl implements MasterCreateService {
         validateUnitMaster(unitMasterCreateDto);
 
         // Check for duplicate entry
-        if(unitMasterDAO.existsByUom(unitMasterCreateDto.getUom())){
-            throw new DuplicateKeyException("Duplicate entry for unique field:" + unitMasterCreateDto.getUom());
+        if(unitMasterDAO.existsByProductUom(unitMasterCreateDto.getProductUom())){
+            throw new DuplicateKeyException("Duplicate entry for unique field:" + unitMasterCreateDto.getProductUom());
         }
 
         UnitMasterCreate unitMasterCreate = UnitMasterCreateMapper.mapToUnitMasterCreate(unitMasterCreateDto);
@@ -324,16 +324,16 @@ public class MasterCreateServiceImpl implements MasterCreateService {
 
 
     private void validateUnitMaster(UnitMasterCreateDto unitMasterCreateDto){
-        if(unitMasterCreateDto.getUom() == null || unitMasterCreateDto.getUom().isEmpty()){
+        if(unitMasterCreateDto.getProductUom() == null || unitMasterCreateDto.getProductUom().isEmpty()){
             throw new IllegalArgumentException("Unique field cannot be empty!");
         }
     }
 
     @Override
-    public UnitMasterCreateDto getUnitMaster(String uom){
-        UnitMasterCreate unitMasterCreate = unitMasterDAO.findById(uom).orElseThrow(()->
+    public UnitMasterCreateDto getUnitMaster(String productUom){
+        UnitMasterCreate unitMasterCreate = unitMasterDAO.findById(productUom).orElseThrow(()->
 
-                new ResourceNotFoundException("Unit is not found with this name:" + uom));
+                new ResourceNotFoundException("Unit is not found with this name:" + productUom));
 
         return UnitMasterCreateMapper.mapToUnitMasterCreateDto(unitMasterCreate);
 
