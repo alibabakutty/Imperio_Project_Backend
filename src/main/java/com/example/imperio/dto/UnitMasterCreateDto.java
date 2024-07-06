@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UnitMasterCreateDto {
 
-    private String uom;
+    private String productUom;
 }

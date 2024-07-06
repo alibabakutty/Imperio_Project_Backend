@@ -8,13 +8,13 @@ public class UnitMasterCreateMapper {
 
     public static UnitMasterCreateDto mapToUnitMasterCreateDto(UnitMasterCreate unitMasterCreate){
         return new UnitMasterCreateDto(
-                unitMasterCreate.getUom()
+                unitMasterCreate.getProductUom()
         );
     }
 
     public static UnitMasterCreate mapToUnitMasterCreate(UnitMasterCreateDto unitMasterCreateDto){
         return new UnitMasterCreate(
-                unitMasterCreateDto.getUom()
+                unitMasterCreateDto.getProductUom()
         );
     }
 }

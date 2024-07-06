@@ -17,6 +17,6 @@ import lombok.*;
 public class UnitMasterCreate {
 
     @Id
-    @Column(name = "uom")
-    private String uom;
+    @Column(name = "product_uom")
+    private String productUom;
 }
